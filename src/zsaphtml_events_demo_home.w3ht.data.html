@@ -1,0 +1,68 @@
+<HTML><HEAD>   <TITLE>SAP HTML Control Demo Page</TITLE>
+<script type="text/javascript">
+function addMessage(text)
+{
+  document.getElementById("dynMsg").innerHTML += "<br />" + text;
+}
+function evtHdl(evt)
+{
+   addMessage("handler: " + evt.target || evt.srcElement );
+}
+function myOnLoad(){
+  try{
+	addMessage("in progress");
+	var form = document.createElement("form");
+	form.setAttribute("method", "post");
+	form.setAttribute("action", "sapevent:abapGit");
+
+	var hiddenField = document.createElement("input");
+	hiddenField.setAttribute("type", "text");
+	hiddenField.setAttribute("name", "/src/filename");
+	hiddenField.setAttribute("value", "A");
+	form.appendChild(hiddenField);
+    hiddenField.onchange = evtHdl;
+
+	var sendBtn = document.createElement("INPUT");
+	sendBtn.setAttribute("type", "submit");
+	sendBtn.setAttribute("value", "submit");
+
+	form.appendChild(sendBtn);
+	document.getElementById("dynForm").appendChild(form);
+	form.onsubmit = evtHdl;
+	document.getElementById("addForm").value = "Loaded";
+  }catch(err){ addMessage("Exception:" + err.message  + err.toString()); }
+
+}
+</script>
+ </HEAD>
+<BODY BACKGROUND="HOME_BACKGROUND.GIF" onLoad="myOnLoad();"><blockquote>
+<H1> <IMG SRC="SAPLOGO.GIF" ALIGN="MIDDLE"> SAP HTML Control Demo Page </H1>
+<P>&nbsp;
+<table border="1" rules="rows" frame="void"><tr><td>
+<H2> Generating Events with SAP HTML Control </H2>
+<P><FORM method="post" action="SAPEVENT:PRESS_ME?MYPARAMERS"><A HREF="SAPEVENT:CLICK_ON_ME?MYPARAMERS"> Click on me to send an event!</A> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <INPUT TYPE="submit" VALUE="Press me to send an event!"></FORM>
+<P>&nbsp;</td></tr><tr><td>&nbsp;
+<H2> Using HTML frames and framesets with SAP HTML Control </H2>
+<FORM method="post" action="SAPEVENT:SHOW_FRAMESET">
+<P><INPUT TYPE="submit" VALUE="Press me to see a frameset">
+</FORM>
+<P>&nbsp;</td></tr><tr><td>&nbsp;
+<H2> Using HTML forms with SAP HTML Control </H2>
+<table><tr><td>
+<FORM method="get" action="SAPEVENT:SUBMIT_FORM_AS_GET_METHOD">
+<P>First Name <INPUT TYPE="text" NAME="FirstName" VALUE="John1">
+<P>Last Name <INPUT TYPE="text" NAME="LastName" VALUE="Smith">
+<P><INPUT TYPE="submit" VALUE="Submit input using GET method">
+</FORM></td><td>
+<FORM method="post" action="SAPEVENT:SUBMIT_FORM_AS_POST_METHOD">
+<P>First Name <INPUT TYPE="text" NAME="FirstName" VALUE="John2">
+<P>Last Name <INPUT TYPE="text" NAME="LastName" VALUE="Smith">
+<P><INPUT TYPE="submit" VALUE="Submit input using POST method">
+</FORM></td></tr></table>
+<P>&nbsp;</td></tr><tr><td></td></tr></table>
+<H2> Dynamic Form </H2>
+<p id="dynForm">
+<input type="button" id="addForm" NAME="addForm" VALUE="Add Form" onclick="myOnLoad();">
+<p id="dynMsg"></p>
+<p>
+</blockquote></BODY></HTML>
