@@ -15,7 +15,7 @@
      <RELID>HT</RELID>
      <OBJID>ZEMPTYFILE_ISSUE1857</OBJID>
      <NAME>filename</NAME>
-     <VALUE>empty_File.txt</VALUE>
+     <VALUE>noEmptyFile.txt</VALUE>
     </WWWPARAMS>
     <WWWPARAMS>
      <RELID>HT</RELID>
